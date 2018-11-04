@@ -1,9 +1,13 @@
-<header>
-    <img src="../assets/img/film512.png">
-    <h2>{{ title }}</h2>
-</header>
+<nav class="navbar navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">
+        <img src="../assets/img/film512.png" width="30" height="30" alt="">
+        {{ title }}
+    </a>
+</nav>
 
 <main>
-<app-film-form></app-film-form>
+    <app-film-form></app-film-form>
+    <app-films-table></app-films-table>
 </main>
+
 
