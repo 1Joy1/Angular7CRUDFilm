@@ -9,7 +9,7 @@ import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 
-export class FilmService {
+export class FilmHttpService {
     private apiUrl = 'api/films';
     private headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -36,25 +36,25 @@ export class FilmService {
 
     public readFilms(): Observable<Film[]> {
         return this.http.get<Film[]>(this.apiUrl)
-            .pipe(catchError(FilmService.handleError));
+            .pipe(catchError(FilmHttpService.handleError));
     }
 
 
     createFilm(film: Film): Observable<Film> {
-        const httpOptions = { headers: this.headers };
+        const httpOptions: object = { headers: this.headers };
 
         return this.http.post<Film>(this.apiUrl, film, httpOptions)
-            .pipe(catchError(FilmService.handleError));
+            .pipe(catchError(FilmHttpService.handleError));
     }
 
 
     updateFilm(film: Film): Observable<any> {
-        const httpOptions: {} = { heaers: this.headers,  observe: 'response'};
+        const httpOptions: object = { heaers: this.headers,  observe: 'response'};
         const url = `${this.apiUrl}/${film.id}`;
 
         return this.http.put(url, film, httpOptions)
             .pipe( map( (response: HttpResponse<{}>) => response.status === 204 ),
-                catchError(FilmService.handleError));
+                catchError(FilmHttpService.handleError));
     }
 
     deleteFilm(film: Film): Observable<any> {
@@ -63,6 +63,13 @@ export class FilmService {
 
         return this.http.delete(url, httpOptions)
             .pipe( map( (response: HttpResponse<{}>) => response.status === 204 ),
-                catchError(FilmService.handleError));
+                catchError(FilmHttpService.handleError));
+    }
+
+    uploadPoster(img): Observable<any> {
+        const httpOptions: object = { headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data' }), observe: 'response' };
+        const url = 'api/image/';
+        return this.http.post<Film>(url, img, httpOptions)
+            .pipe(catchError(FilmHttpService.handleError));
     }
 }

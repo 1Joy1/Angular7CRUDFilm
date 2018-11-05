@@ -14,8 +14,7 @@
             "kebab-case"
         ],
         "no-trailing-whitespace": [
-            true,
-            "ignore-comments"
+            false
         ]
     }
 }

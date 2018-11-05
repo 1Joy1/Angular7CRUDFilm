@@ -6,11 +6,11 @@ export class InMemoryDataService implements InMemoryDbService {
         const films = [
             {
                 id: 1,
-                film_name: 'Крепкий орешек',
+                filmName: 'Крепкий орешек',
                 genre: 'Триллер',
                 duration: '01:48',
-                date_release: 1988,
-                age_limit: 16,
+                dateRelease: 1988,
+                ageLimit: 16,
                 description: 'Полицейский Джон МакКлэйн в одиночку ведет смертельную схватку с бандой политических' +
                 ' террористов в суперсовременном небоскребе Лос-Анджелеса. Залезает на крышу гигантского небоскреба' +
                 ' в Лос-Анджелесе, зависает в шахте лифта, бегает босиком по битым стеклам...\n' +
@@ -18,27 +18,27 @@ export class InMemoryDataService implements InMemoryDbService {
                 ' А начиналось все так мирно: приехал в город, где работает жена, попал на рождественский прием...',
                 subtitle: true,
                 poster: 'https://www.kino-teatr.ru/movie/posters/big/4/3274.jpg',
-                permitted_ip: ['192.168.1.1', '192.168.1.1', '192.16.1.1/24'],
+                permittedIp: ['192.168.1.1', '192.168.1.1', '192.16.1.1/24'],
             },
             {
                 id: 2,
-                film_name: 'Легенда',
+                filmName: 'Легенда',
                 genre: 'Триллер',
                 duration: '02:08',
-                date_release: 2015,
-                age_limit: '',
+                dateRelease: 2015,
+                ageLimit: '',
                 description: 'Тут какое то описание фильма. С какими то комментариями',
                 subtitle: false,
                 poster: 'https://www.kino-teatr.ru/movie/posters/big/0/116830.jpg',
-                permitted_ip: ['192.168.3.1', '19.18.1.1', '192.16.1.1/24'],
+                permittedIp: ['192.168.3.1', '19.18.1.1', '192.16.1.1/24'],
             },
             {
                 id: 3,
-                film_name: 'Метель',
+                filmName: 'Метель',
                 genre: 'Триллер',
                 duration: '01:55',
-                date_release: 2013,
-                age_limit: 18,
+                dateRelease: 2013,
+                ageLimit: 18,
                 description: 'По мотивам одноименного рассказа Л.Н.Толстого.\n' +
                 'Действие перенесено в наши дни.\n' +
                 '\n' +
@@ -52,19 +52,19 @@ export class InMemoryDataService implements InMemoryDbService {
                 'Это ностальгия по прошлому, по золотому веку, традициям, культуре.',
                 subtitle: true,
                 poster: 'https://www.kino-teatr.ru/movie/posters/big/6/85096.jpg',
-                permitted_ip: ['192.168.1.1', '192.168.1.1', '192.16.1.1/24'],
+                permittedIp: ['192.168.1.1', '192.168.1.1', '192.16.1.1/24'],
             },
             {
                 id: 4,
-                film_name: 'Кухня',
+                filmName: 'Кухня',
                 genre: 'Комедия',
                 duration: '10:54',
-                date_release: 2012,
-                age_limit: 10,
+                dateRelease: 2012,
+                ageLimit: 10,
                 description: 'Тут какое то описание фильма. С какими то комментариями',
                 subtitle: true,
                 poster: '',
-                permitted_ip: ['132.168.1.1', '132.168.1.1', '132.16.1.1/24'],
+                permittedIp: ['132.168.1.1', '132.168.1.1', '132.16.1.1/24'],
             },
         ];
 
