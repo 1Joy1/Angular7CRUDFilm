@@ -1,0 +1,43 @@
+input.ng-invalid.ng-touched {
+    border: 1px solid #dd0031;
+    box-shadow: 0 0 2px 1px rgba(255, 3, 3, 1);
+}
+
+textarea.ng-invalid.ng-touched {
+    border: 1px solid #dd0031;
+    box-shadow: 0 0 2px 1px rgba(255, 3, 3, 1);
+}
+
+select.ng-invalid.ng-touched {
+    border: 1px solid #dd0031;
+    box-shadow: 0 0 2px 1px rgba(255, 3, 3, 1);
+}
+
+img.invalid {
+    border: 1px solid #dd0031;
+    box-shadow: 0 0 2px 1px rgba(255, 3, 3, 1);
+}
+
+img {
+    max-width: 150px;
+    max-height: 150px;
+    cursor: pointer;
+}
+
+::-webkit-input-placeholder {
+    color: #cccece;
+}
+
+::-moz-placeholder {
+    color: #cccece;
+}
+
+/* Firefox 19+ */
+:-moz-placeholder {
+    color: #cccece;
+}
+
+/* Firefox 18- */
+:-ms-input-placeholder {
+    color: #cccece;
+}

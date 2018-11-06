@@ -1,0 +1,111 @@
+<!--Form-->
+<form id="film-form" [formGroup]="filmForm" (submit)="onSubmit()">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="film-name">Название фильма</label>
+            <input type="text" class="form-control" id="film-name" name="film_name"
+                   placeholder="Название фильма" formControlName="filmName">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="genre">Жанр</label>
+            <select class="form-control custom-select" id="genre" name="genre" formControlName="genre">
+                <option>Комедия</option>
+                <option>Драма</option>
+                <option>Мелодрама</option>
+                <option>Боевик</option>
+                <option>Детектив</option>
+                <option>Триллер</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="duration">Длительность</label>
+            <input type="text" class="form-control" id="duration" name="duration"
+                   placeholder="00:00" formControlName="duration">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="date-release">Год выпуска</label>
+            <input type="text" class="form-control" id="date-release" name="date_release"
+                   placeholder="1000-3000" formControlName="dateRelease">
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="age-limit">Ограничение по возрасту</label>
+            <input type="text" class="form-control" id="age-limit" name="age_limit"
+                   placeholder="0-100" formControlName="ageLimit">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Описание фильма</label>
+        <textarea class="form-control" id="description" name="description" rows="2"
+                  placeholder="Описание фильма" formControlName="description"></textarea>
+    </div>
+
+    <div class="form-group">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="subtitle" name="subtitle"
+                   formControlName="subtitle">
+            <label class="custom-control-label" for="subtitle">Наличие субтитров</label>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12">
+            <label>Разрешенные IP адреса</label>
+            <div class="form-group">
+
+                <div class="input-group mb-3" formArrayName="permittedIp"
+                     *ngFor="let permittedIp of filmForm.controls['permittedIp'].controls; let i = index">
+                    <input type="text" class="form-control" name="permitted_ip"
+                           placeholder="100.100.100.100/32" formControlName="{{i}}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-info" type="button"
+                                (click)="removePermittedIpControll(i)">-
+                        </button>
+                        <button class="btn btn-outline-info" type="button"
+                                (click)="addPermittedIpControll()">+
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input title="poster_url" type="text" class="form-control" id="poster-url" name="poster_url"
+           formControlName="posterUrl" hidden>
+</form>
+
+<!--poster form-->
+<form id="poster-form" [formGroup]="posterForm" (submit)="onUploadPoster()">
+    <div class="row">
+        <div class="form-group col-md-12">
+            <div class="form-group">
+                <!--Превью-->
+                <div>
+                    <label for="poster-file">Загрузить постер<br>
+                        <img [src]="imagePreviewSrc || '../../../assets/img/150.png'" alt="Загрузить постер"
+                             [ngClass]="{invalid: getValidPosterStatus()}">
+                        <input type="file" class="form-control-file" id="poster-file" name="poster_file"
+                               accept="image/jpeg" formControlName="posterFile" (change)="onFileChange($event)" hidden>
+                    </label>
+                </div>
+                <div>
+                    <button class="btn btn-info" type="submit" form="poster-form"
+                            [disabled]="posterForm.invalid || posterForm.pristine">Загрузить
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!--<div>-->
+        <!--{{filmForm.value | json}}-->
+        <!--</div>-->
+    </div>
+</form>
+
+<div class="form-row justify-content-center">
+    <div class="col-md-6 ">
+        <button type="submit" form="film-form" class="btn btn-danger btn-block" (submit)="onSubmit()">Сохранить</button>
+    </div>
+</div>
+<!--Form-->

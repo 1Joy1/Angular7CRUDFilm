@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 align-content-center">
+            <table class="table table-striped table-bordered table-sm">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Постер</th>
+                    <th scope="col">Название фильма</th>
+                    <th scope="col">Жанр</th>
+                    <th scope="col">Длительность</th>
+                    <th scope="col">Год выпуска</th>
+                    <th scope="col">Огр. по возрасту</th>
+                    <th scope="col">Субтитры</th>
+                    <th scope="col">Описание</th>
+                    <th scope="col">Допустимые IP</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr *ngFor="let film of films">
+                    <td class="text-center"><img src="{{film.posterUrl || '../../../assets/img/film512.png'}}"
+                                                 alt="Постер"></td>
+                    <td class="text-center">{{film.filmName}}</td>
+                    <td class="text-center">{{film.genre}}</td>
+                    <td class="text-center">{{film.duration}}</td>
+                    <td class="text-center">{{film.dateRelease}}</td>
+                    <td class="text-center">{{film.ageLimit}} <span *ngIf="film.ageLimit">+</span></td>
+                    <td class="text-center">
+                        <i class="material-icons">{{ film.subtitle ? 'check_box' : 'check_box_outline_blank' }}</i>
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-outline-info" (click)="openModal(modalTemplate, film)">Прочесть
+                        </button>
+                    </td>
+                    <td><p *ngFor="let ip of film.permittedIp">{{ip}}</p></td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group" aria-label="Control">
+                            <button type="button" class="btn btn-warning btn-sm" (click)="onEdit(film)">
+                                <i class="material-icons">edit</i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" (click)="onDelete(film)">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<ng-template #modalTemplate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{ modalContent.filmName }}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-4">
+                <img [src]="modalContent.posterUrl || '../../../assets/img/film512.png'">
+            </div>
+            <div class="col-md-8">
+                {{ modalContent.description }}
+            </div>
+        </div>
+
+    </div>
+</ng-template>

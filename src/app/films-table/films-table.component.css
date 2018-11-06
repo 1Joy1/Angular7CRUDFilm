@@ -1,0 +1,26 @@
+.container {
+    margin-top: 30px;
+}
+
+.table img {
+    height: 50px;
+    width: 35px;
+}
+
+.table td p {
+    margin: 0;
+    font-size: small;
+}
+
+.table thead th {
+    font-size: small;
+}
+
+.modal-body img {
+    max-width: 250px;
+}
+
+a {
+    cursor: pointer;
+}
+
