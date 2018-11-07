@@ -16,6 +16,7 @@ export class FilmFormComponent implements OnInit {
     imagePreviewSrc: string;
     selectedFile = null;
     editingFilm = false;
+    posterNotUploaded = false;
 
     patternIpValidation = new RegExp('^' +
         '(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[0-9]{2}|[0-9])' +
@@ -71,6 +72,8 @@ export class FilmFormComponent implements OnInit {
             film.permittedIp.forEach(value => this.addPermittedIpControll(value));
             this.removePermittedIpControll(0);
         }
+
+        this.posterNotUploaded = false;
     }
 
     onFileChange(event) {
@@ -87,6 +90,7 @@ export class FilmFormComponent implements OnInit {
             };
             this.selectedFile = event.target.files[0];
         }
+        this.posterNotUploaded = true;
     }
 
     getValidPosterStatus() {
@@ -109,7 +113,10 @@ export class FilmFormComponent implements OnInit {
         /** TODO: Временная заглушка так, как нет реализации бека*/
         (<FormControl>this.filmForm.controls['posterUrl'])
             .setValue('../../../assets/img/film512.png', {onlySelf: true});
+
         this.filmForm.controls['posterUrl'].updateValueAndValidity();
+
+        this.posterNotUploaded = false;
     }
 
     addPermittedIpControll(ip?): void {

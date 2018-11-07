@@ -18,6 +18,10 @@ select.ng-invalid.ng-touched {
     box-shadow: 0 0 2px 1px rgba(255, 3, 3, 1);
 }
 
+.poster-not-uploaded {
+    opacity: 0.2;
+}
+
 img {
     max-width: 150px;
     max-height: 150px;
