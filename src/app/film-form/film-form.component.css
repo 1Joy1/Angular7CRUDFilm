@@ -13,7 +13,7 @@ select.ng-invalid.ng-touched {
     box-shadow: 0 0 2px 1px rgba(255, 3, 3, 1);
 }
 
-img.invalid {
+.poster-invalid {
     border: 1px solid #dd0031;
     box-shadow: 0 0 2px 1px rgba(255, 3, 3, 1);
 }

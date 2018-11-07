@@ -85,14 +85,15 @@
                 <div>
                     <label for="poster-file">Загрузить постер<br>
                         <img [src]="imagePreviewSrc || '../../../assets/img/150.png'" alt="Загрузить постер"
-                             [ngClass]="{invalid: getValidPosterStatus()}">
+                             [class.poster-invalid] = "getValidPosterStatus()">
                         <input type="file" class="form-control-file" id="poster-file" name="poster_file"
                                accept="image/jpeg" formControlName="posterFile" (change)="onFileChange($event)" hidden>
                     </label>
                 </div>
                 <div>
                     <button class="btn btn-info" type="submit" form="poster-form"
-                            [disabled]="posterForm.invalid || posterForm.pristine">Загрузить
+                            [disabled]="posterForm.invalid || posterForm.pristine"
+                            [class.poster-invalid] = "getValidPosterStatus()">Загрузить
                     </button>
                 </div>
             </div>
