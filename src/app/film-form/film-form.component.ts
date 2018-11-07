@@ -55,6 +55,7 @@ export class FilmFormComponent implements OnInit {
 
     initFilmForm(film?): void {
         this.filmForm = this.formBuilder.group({
+            id: [film ? film.id : ''],
             filmName: [film ? film.filmName : '', [Validators.required]],
             genre: [film ? film.genre : '', [Validators.required]],
             duration: [film ? film.duration : '', [Validators.required, Validators.pattern(/^[0-9][0-9](:[0-5][0-9])$/)]],
@@ -99,22 +100,7 @@ export class FilmFormComponent implements OnInit {
             return;
         }
 
-        const film = this.newFilm();
-        this.editingFilm ? this.shareService.createFilm(film) : this.shareService.updateFilm(film);
-    }
-
-    private newFilm(): Film {
-        return new Film(
-            this.filmForm.value.filmName,
-            this.filmForm.value.genre,
-            this.filmForm.value.duration,
-            this.filmForm.value.dateRelease,
-            this.filmForm.value.ageLimit,
-            this.filmForm.value.description,
-            this.filmForm.value.subtitle,
-            this.filmForm.value.posterUrl,
-            this.filmForm.value.permittedIp,
-        );
+        this.editingFilm ? this.shareService.updateFilm(this.filmForm.value) : this.shareService.createFilm(this.filmForm.value);
     }
 
     onUploadPoster() {

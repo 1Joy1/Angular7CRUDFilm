@@ -51,7 +51,6 @@ export class FilmsTableComponent implements OnInit {
     onEdit(film: Film) {
         this.shareService.editingFilm(film);
         this.shareService.onUpdate.subscribe((editedFilm: Film) => {
-            editedFilm['id'] = film['id'];
             this.onUpdate(film, editedFilm);
         });
     }
