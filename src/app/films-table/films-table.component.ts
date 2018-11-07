@@ -56,7 +56,7 @@ export class FilmsTableComponent implements OnInit {
     }
 
 
-    onUpdate(film: Film, editedFilm) {
+    onUpdate(film: Film, editedFilm: Film) {
         this.filmHttpService.updateFilm(editedFilm).subscribe((status: boolean) => {
             const index = this.films.indexOf(film);
             if (index > -1 && status) {

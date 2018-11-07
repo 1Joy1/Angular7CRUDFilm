@@ -36,7 +36,7 @@ export class FilmHttpService {
     }
 
 
-    createFilm(film: Film): Observable<Film> {
+    public createFilm(film: Film): Observable<Film> {
         const httpOptions: object = {headers: this.headers};
 
         return this.http.post<Film>(this.apiUrl, film, httpOptions)
@@ -44,7 +44,7 @@ export class FilmHttpService {
     }
 
 
-    updateFilm(film: Film): Observable<any> {
+    public updateFilm(film: Film): Observable<any> {
         const httpOptions: object = {heaers: this.headers, observe: 'response'};
         const url = `${this.apiUrl}/${film.id}`;
 
@@ -53,7 +53,7 @@ export class FilmHttpService {
                 catchError(FilmHttpService.handleError));
     }
 
-    deleteFilm(film: Film): Observable<any> {
+    public deleteFilm(film: Film): Observable<any> {
         const httpOptions: object = {headers: this.headers, observe: 'response'};
         const url = `${this.apiUrl}/${film.id}`;
 
@@ -62,7 +62,7 @@ export class FilmHttpService {
                 catchError(FilmHttpService.handleError));
     }
 
-    uploadPoster(img): Observable<any> {
+    public uploadPoster(img): Observable<any> {
         const httpOptions: object = {headers: new HttpHeaders({'Content-Type': 'multipart/form-data'}), observe: 'response'};
         const url = 'upload/image/';
         return this.http.post<Film>(url, img, httpOptions)

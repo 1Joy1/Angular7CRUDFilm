@@ -14,9 +14,9 @@ export class FilmFormComponent implements OnInit {
     filmForm: FormGroup;
     posterForm: FormGroup;
     imagePreviewSrc: string;
-    selectedFile = null;
-    editingFilm = false;
-    posterNotUploaded = false;
+    selectedFile: object;
+    editingFilm: boolean;
+    posterNotUploaded: boolean;
 
     patternIpValidation = new RegExp('^' +
         '(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[0-9]{2}|[0-9])' +
@@ -30,31 +30,27 @@ export class FilmFormComponent implements OnInit {
                 private shareService: ShareService) {
 
         this.shareService.openCreateForm.subscribe(() => {
-            this.ngOnInit();
-            this.editingFilm = false;
+            this.initFilmForm();
         });
 
         this.shareService.openEditForm.subscribe((film: Film) => {
             this.initFilmForm(film);
-            this.initPosterForm();
-            this.imagePreviewSrc = film.posterUrl;
-            this.editingFilm = true;
         });
     }
 
     ngOnInit() {
         this.initFilmForm();
-        this.initPosterForm();
-        this.imagePreviewSrc = '';
     }
 
     initPosterForm(): void {
         this.posterForm = this.formBuilder.group({
-            posterFile: [null, Validators.required],
+            posterFile: [null, Validators.required]
         });
     }
 
     initFilmForm(film?): void {
+        this.initPosterForm();
+
         this.filmForm = this.formBuilder.group({
             id: [film ? film.id : ''],
             filmName: [film ? film.filmName : '', [Validators.required]],
@@ -73,10 +69,12 @@ export class FilmFormComponent implements OnInit {
             this.removePermittedIpControll(0);
         }
 
+        this.imagePreviewSrc = film ? film.posterUrl : '';
+        this.editingFilm = !!film;
         this.posterNotUploaded = false;
     }
 
-    onFileChange(event) {
+    onFileChange(event): void {
         const reader = new FileReader();
 
         if (event.target.files && event.target.files.length) {
@@ -93,7 +91,7 @@ export class FilmFormComponent implements OnInit {
         this.posterNotUploaded = true;
     }
 
-    getValidPosterStatus() {
+    getValidPosterStatus(): boolean {
         return this.filmForm.controls['posterUrl'].invalid && this.filmForm.controls['posterUrl'].touched;
     }
 
@@ -101,10 +99,9 @@ export class FilmFormComponent implements OnInit {
         if (this.filmForm.invalid) {
             this.markFormGroupTouched(this.filmForm);
             this.markFormGroupTouched(this.posterForm);
-            return;
+        } else {
+            this.editingFilm ? this.shareService.updateFilm(this.filmForm.value) : this.shareService.createFilm(this.filmForm.value);
         }
-
-        this.editingFilm ? this.shareService.updateFilm(this.filmForm.value) : this.shareService.createFilm(this.filmForm.value);
     }
 
     onUploadPoster() {
@@ -131,11 +128,10 @@ export class FilmFormComponent implements OnInit {
 
         if (ipFields.length > 1) {
             ipFields.removeAt(indexFild);
-
         }
     }
 
-    markFormGroupTouched(Form: FormGroup) {
+    markFormGroupTouched(Form: FormGroup): void {
         (<any>Object).values(Form.controls).forEach(control => {
             control.markAsTouched();
 
