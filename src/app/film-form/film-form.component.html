@@ -54,7 +54,7 @@
     <div class="form-row">
         <div class="col-md-12">
             <label>Разрешенные IP адреса</label>
-            <div class="form-group">
+            <div class="form-group" *ngIf="filmForm.controls['permittedIp']">
 
                 <div class="input-group mb-3" formArrayName="permittedIp"
                      *ngFor="let permittedIp of filmForm.controls['permittedIp'].controls; let i = index">
