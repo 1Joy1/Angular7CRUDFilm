@@ -51,14 +51,14 @@ export class FilmsTableComponent implements OnInit {
     onEdit(film: Film) {
         this.shareService.editingFilm(film);
         this.shareService.onUpdate.subscribe((editedFilm: Film) => {
-            this.onUpdate(film, editedFilm);
+            this.onUpdate(editedFilm);
         });
     }
 
 
-    onUpdate(film: Film, editedFilm: Film) {
+    onUpdate(editedFilm: Film) {
         this.filmHttpService.updateFilm(editedFilm).subscribe((status: boolean) => {
-            const index = this.films.indexOf(film);
+            const index = this.films.findIndex((film: Film) => film.id === editedFilm.id);
             if (index > -1 && status) {
                 this.films[index] = editedFilm;
                 this.shareService.closeModal();
